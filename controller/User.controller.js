@@ -20,7 +20,7 @@ UserController.post("/sign",async(req,res)=>{
     try{
       const existingUser=await UserModel.findOne({email});
        if(existingUser){
-        res.json("Already an user!")
+        res.json({msg:"Already an user!"})
        }
        else{ console.log(name, email, password, profileImg);
         bcrypt.hash(password, 5, async function(err, hash) {
@@ -36,11 +36,11 @@ UserController.post("/sign",async(req,res)=>{
          
             res.json({msg:"Account Created!",user:{ id:user._id,name, email, profileImg,token}})}
             else if(err){
-                res.json("Something went wrong try again!")
+                res.json({msg:"Something went wrong try again!"})
                 console.log(err);
             }
             else{
-                res.json("Invalid Credentials!");
+                res.json({msg:"Invalid Credentials!"});
                
             }
             
